@@ -37,3 +37,6 @@ kotlin {
     jvmToolchain(17)
 }
 
+application {
+    mainClass.set("com.superformula.ApplicationKt")
+}
