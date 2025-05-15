@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: mobiletest-api
+    env: java
+    buildCommand: cd Backend/mobile-test && ./gradlew installDist
+    startCommand: ./Backend/mobile-test/build/install/mobile-test/bin/mobile-test
+    envVars:
+      - key: PORT
+        value: 8080
