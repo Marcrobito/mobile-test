@@ -17,6 +17,18 @@ import com.superformula.mobiletest.ui.components.HomeButton
 import com.superformula.mobiletest.ui.components.PermissionRequiredAlertDialog
 import com.superformula.mobiletest.util.isCameraPermissionGranted
 
+/**
+ * Displays the Home screen with two primary actions:
+ * scanning a QR code and requesting a seed.
+ *
+ * This screen includes logic to check for camera permissions
+ * before proceeding to the QR scanner. If the permission is not granted,
+ * a dialog is shown requesting the user to grant it.
+ *
+ * @param onScanButtonClicked Callback triggered when the Scan QR button is clicked and permission is granted.
+ * @param onSeedButtonClicked Callback triggered when the Get Seed button is clicked.
+ * @param onPositiveAlertButtonClicked Callback triggered when the user accepts the camera permission dialog.
+ */
 @Composable
 fun HomeScreen(
     onScanButtonClicked: () -> Unit = {},

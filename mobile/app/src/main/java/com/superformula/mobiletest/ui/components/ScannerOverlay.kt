@@ -7,6 +7,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 
+/**
+ * A composable overlay used to simulate a scanner mask with a transparent cutout area.
+ *
+ * This overlay darkens the entire screen except for a rounded rectangular area in the center,
+ * which acts as a cutout for scanning (e.g., QR codes). The cutout is created by drawing a
+ * transparent rounded rectangle with a blend mode that clears the specified area.
+ *
+ * @param modifier Modifier to be applied to the Canvas.
+ * @param cornerRadius The corner radius for the cutout rectangle.
+ * @param cutoutWidthRatio The width of the cutout relative to the screen width (0.0 to 1.0).
+ * @param cutoutHeightRatio The height of the cutout relative to the screen height (0.0 to 1.0).
+ */
 @Composable
 fun ScannerOverlay(
     modifier: Modifier = Modifier,

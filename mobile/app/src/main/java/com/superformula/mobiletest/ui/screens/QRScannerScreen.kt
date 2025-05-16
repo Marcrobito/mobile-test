@@ -32,12 +32,21 @@ import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 import com.superformula.mobiletest.ui.components.ScannerOverlay
 
+/**
+ * Composable that displays a QR code scanner using the device's camera.
+ *
+ * This screen binds a camera preview and image analyzer that scans for barcodes (QR codes)
+ * using ML Kit's BarcodeScanning client. When a QR code is detected, its value is displayed
+ * on screen. A back arrow is also displayed in the top-left corner.
+ *
+ * @param modifier Modifier to be applied to the root composable.
+ * @param onBackPressed Callback invoked when the back arrow is clicked.
+ */
 @OptIn(ExperimentalGetImage::class)
 @Composable
 fun QRScannerScreen(
     modifier: Modifier = Modifier,
-    onBackPressed:() -> Unit,
-    onCodeScanned: (String) -> Unit
+    onBackPressed:() -> Unit
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -73,7 +82,6 @@ fun QRScannerScreen(
                                 val code = barcodes.firstOrNull()?.rawValue
                                 if (code != null) {
                                     scannedText = code
-                                    onCodeScanned(code)
                                 }
                             }
                             .addOnCompleteListener {

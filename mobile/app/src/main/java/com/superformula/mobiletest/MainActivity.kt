@@ -17,13 +17,25 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.superformula.mobiletest.ui.navigation.MainNavigation
 import com.superformula.mobiletest.ui.theme.MobileTestTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Main entry point for the app, annotated with [AndroidEntryPoint] to enable Hilt dependency injection.
+ *
+ * This activity sets up the theme, system UI behavior, and manages runtime camera permission requests.
+ */
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    /**
+     * Launcher used to request camera permission from the user at runtime.
+     */
     private lateinit var requestCameraPermissionLauncher: ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Initializes the permission launcher for requesting camera access.
         requestCameraPermissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { isGranted ->
@@ -35,6 +47,8 @@ class MainActivity : ComponentActivity() {
         }
 
         enableEdgeToEdge()
+
+        // Sets the Compose UI content and handles navigation and layout padding.
         setContent {
             MobileTestTheme {
                 Scaffold(
@@ -43,13 +57,12 @@ class MainActivity : ComponentActivity() {
                         .padding(WindowInsets.systemBars.asPaddingValues()),
                     topBar = { }
                 ) { innerPadding ->
-                    innerPadding
                     MainNavigation(
+                        innerPadding,
                         onPositiveAlertButtonClicked = {
                             requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
                         }
                     )
-
                 }
             }
         }
